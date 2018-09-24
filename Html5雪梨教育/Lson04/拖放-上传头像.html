@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>拖放-上传头像</title>
+		<style>
+			#div1{
+				width: 180px;
+				height: 180px;
+				border:1px solid #696969;
+				padding:auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>上传头像</h3>
+		<div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+	</body>
+	<script type="text/javascript">
+		function allowDrop(ev)
+		{
+			ev.preventDefault();
+		}
+		function drop(ev){
+       		ev.preventDefault();
+      		var files=ev.dataTransfer.files;
+      	 	var fd=new FileReader();
+       		if(files[0].type.indexOf('image')!=-1){
+       			fd.readAsDataURL(files[0]);
+      			var div=document.getElementById("div1");
+       			fd.onload=function(){
+         			var img1=document.createElement("img");
+         			img1.src=this.result;
+        			div1.appendChild(img1);
+       			}
+       		}else{alert("请选择图片上传");}
+      	}	
+	</script>
+</html>
