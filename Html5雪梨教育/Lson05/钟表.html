@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>钟表</title>
+		<link rel="icon" href="images/taidi.jpg" />
+		<style>
+			canvas{
+				border: 1px solid #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="500" height="500"></canvas>
+	</body>
+	<script type="text/javascript">
+		var c=document.getElementById('myCanvas');
+		var cxt=c.getContext('2d' ); 
+		function drawClock(){
+		 cxt.clearRect(0,0,500,500); //清除画布	
+		//获取时间
+		var now = new Date();     
+		var sec = now.getSeconds();  
+		var minute = now.getMinutes();
+		var hour = now.getHours();    
+		hour = hour + minute/60;  
+		hour=hour>12?hour-12:hour;
+		
+		//表盘
+		cxt.beginPath();  
+		cxt.lineWidth = 5;
+		cxt.strokeStyle="#7FFF00"; 
+		cxt.arc(250,250,200,0,360,false);
+		cxt.stroke();  
+		cxt.closePath(); 
+		
+		//时针刻度
+		for(var i=0; i<12; i++){
+			cxt.save(); 
+			cxt.lineWidth=7;
+			cxt.strokeStyle="red";
+			
+			cxt.translate(250,250);
+			cxt.rotate(30*i/180*Math.PI);
+			cxt.beginPath(); 
+			cxt.moveTo(0,-170);   		
+			cxt.lineTo(0,-190);   
+			cxt.stroke();
+			cxt.fillStyle="black";
+			if(i == 0){
+			cxt.fillText(12,0,-150,20);
+			}else{
+			cxt.fillText(i,0,-150,20);
+			}
+			cxt.closePath();
+			cxt.restore();
+		}
+
+		//分针刻度
+		for(var i=0; i<60;i++){
+			if(i%5 != 0){
+				cxt.save();
+				cxt.lineWidth=5;
+				cxt.strokeStyle="#000";
+				cxt.translate(250,250);
+				cxt.rotate(6*i/180*Math.PI);
+				cxt.beginPath();
+				cxt.moveTo(0,-180);
+				cxt.lineTo(0,-190);
+				cxt.stroke();
+				cxt.closePath();
+				cxt.restore();  
+			}
+		}
+		//时针
+		cxt.save();  
+		//时针样式
+		cxt.lineWidth = 7;
+		cxt.strokeStyle="#000";
+		cxt.translate(250,250); 
+		cxt.rotate(hour*30/180*Math.PI); 
+		cxt.beginPath();   
+		cxt.moveTo(0,-130);  
+		cxt.lineTo(0,10);   
+		cxt.stroke();   
+		cxt.closePath();   
+		cxt.restore();  
+		
+		//分针
+		cxt.save();
+		//分针样式
+		cxt.lineWidth = 4;
+		cxt.strokeStyle="#000";
+		cxt.translate(250,250);
+		cxt.rotate(minute*6/180*Math.PI);
+		cxt.beginPath();
+		cxt.moveTo(0,-160);
+		cxt.lineTo(0,15);
+		cxt.stroke();
+		cxt.closePath();
+		cxt.restore();
+		
+		//秒针
+		cxt.save();
+		cxt.lineWidth = 2;
+		cxt.strokeStyle="#f00";
+		cxt.translate(250,250);
+		cxt.rotate(sec*6/180*Math.PI);
+		cxt.beginPath();
+		cxt.moveTo(0,-185);
+		cxt.lineTo(0,20);
+		cxt.stroke();
+		cxt.closePath();
+		
+		//画出时针，分针，秒针交叉点
+		cxt.beginPath();
+		cxt.strokeStyle="#f00";
+		cxt.arc(0,0,5,0,360,false);
+		cxt.fillStyle="#fff";   
+		cxt.fill();     
+		cxt.stroke();  
+		cxt.closePath();
+            
+		//秒针装饰
+		cxt.beginPath();
+		cxt.strokeStyle="#f00";
+		cxt.arc(0,-160,5,0,360,false);
+		cxt.fill();   //填充
+		cxt.stroke();
+		cxt.closePath();
+		cxt.restore();
+		}
+		drawClock();
+		setInterval(drawClock,1000);
+		
+		
+	</script>	
+</html>
