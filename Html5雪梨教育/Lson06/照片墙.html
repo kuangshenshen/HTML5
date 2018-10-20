@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>照片墙</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.append{
+				width:800px;
+				height: 600px;
+				background: url(images/bg3.JPG) #eee no-repeat 100% 100%;
+				background-size: cover;
+				position: relative;
+			}
+			.append div{
+				width: 70px;
+				height: 80px;
+				float: left;
+				border:  1px solid #aaa;
+				background-color: #fff;
+				padding:10px;
+				margin: 60px 20px;
+				text-align: center;
+			}
+			img{
+				width: 50px;
+			}
+			.append-1{
+				transform: rotate(-10deg);
+			}
+			.append-2{
+    			transform: rotate(20deg);
+			}
+			.append-3{
+    			transform: rotate(-30deg);
+			}
+			.append-4{
+    			transform: rotate(30deg);
+			}
+			.append-5{
+     			transform: rotate(-20deg);
+			}
+			.append-6{
+    			transform: rotate(10deg);
+			}
+			div[class ^= "append-"]:hover{
+				transform: rotate(0deg) scale(2.0);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="append">
+			<div class="append-1">
+				<img src="images/11.jpg">
+				<br />相识
+			</div>
+			<div class="append-2">
+				<img src="images/22.jpg">
+				<br/>凝视
+			</div>
+			<div class="append-3">
+				<img src="images/33.jpg">
+				<br/>甜睡
+			</div>
+			<div class="append-4">
+				<img src="images/44.jpg">
+				<br/>逗乐
+			</div>
+			<div class="append-5">
+				<img src="images/55.jpg">
+				<br/>奔跑
+			</div>
+			<div class="append-6">
+				<img src="images/66.jpg">
+				<br/>漠视
+			</div>
+		</div>
+	</body>
+</html>
